@@ -18,7 +18,9 @@
     <script src="tailwind.config.js"></script>
     <script src="assets/js/script.js" type="module"></script>
   </head>
-  <body class="flex flex-col items-center min-h-screen font-mono bg-dark-blue">
+  <body
+    class="flex flex-col items-center min-h-screen font-mono bg-dark-blue selection:bg-selection"
+  >
     <header class="mt-8 space-y-8 text-center">
       <a
         class="text-4xl transition-all duration-300 ease-in cursor-pointer text-primary hover:text-bright-gray animate-fade"
@@ -64,7 +66,23 @@
       </menu>
     </header>
     <main></main>
-    <footer class="absolute select-none text-primary bottom-2 animate-fade">
+    <footer
+      class="absolute flex flex-col items-center justify-center space-y-8 text-primary bottom-2 animate-fade"
+    >
+      <div class="flex flex-col items-center justify-center gap-2 text-xs">
+        <div class="flex flex-row items-center justify-center gap-1">
+          <div class="px-1 leading-none bg-secondary text-bright-gray w-fit">
+            esc
+          </div>
+          - reset test (new prompt)
+        </div>
+        <div class="flex flex-row items-center justify-center gap-1">
+          <div class="px-1 leading-none bg-secondary text-bright-gray w-fit">
+            enter
+          </div>
+          - restart test
+        </div>
+      </div>
       <small
         >Created by
         <a

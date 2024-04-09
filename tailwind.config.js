@@ -6,7 +6,8 @@ tailwind.config = {
         'dark-blue': '#0b1318',
         primary: '#96b8d3',
         secondary: '#2b5c85',
-        accent: '#559cd6'
+        accent: '#559cd6',
+        selection: '#5637EE'
       },
       keyframes: {
         drop: {
