@@ -21,16 +21,16 @@
   <body class="flex flex-col items-center min-h-screen font-mono bg-dark-blue">
     <header class="mt-8 space-y-8 text-center">
       <a
-        class="text-4xl transition-all duration-300 ease-in cursor-pointer text-primary hover:text-bright-gray"
+        class="text-4xl transition-all duration-300 ease-in cursor-pointer text-primary hover:text-bright-gray animate-fade"
         href="/"
         aria-label="go to home page"
         >blitztype
       </a>
       <menu
-        class="flex flex-row gap-4 px-4 py-2 text-sm rounded-md w-fit h-fit bg-secondary text-bright-gray"
+        class="flex flex-row gap-4 px-4 py-2 text-sm rounded-md w-fit h-fit bg-secondary text-bright-gray animate-drop"
       >
         <button
-          class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent"
+          class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent active:scale-95"
           id="stats"
         >
           <svg width="24" height="24" class="fill-current">
@@ -38,7 +38,7 @@
           >statistics
         </button>
         <button
-          class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent"
+          class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent active:scale-95"
           id="reset"
         >
           <svg width="24" height="24" class="fill-current">
@@ -51,7 +51,7 @@
           >reset
         </button>
         <button
-          class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent"
+          class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent active:scale-95"
           id="restart"
         >
           <svg width="24" height="24" class="fill-current">
@@ -64,7 +64,7 @@
       </menu>
     </header>
     <main></main>
-    <footer class="absolute select-none text-primary bottom-2">
+    <footer class="absolute select-none text-primary bottom-2 animate-fade">
       <small
         >Created by
         <a
