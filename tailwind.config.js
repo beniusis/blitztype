@@ -7,7 +7,9 @@ tailwind.config = {
         primary: '#96b8d3',
         secondary: '#2b5c85',
         accent: '#559cd6',
-        selection: '#5637EE'
+        selection: '#5637EE',
+        'light-green': '#5ece51',
+        'light-red': '#e12340'
       },
       keyframes: {
         fade: {
