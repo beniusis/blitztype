@@ -7,13 +7,18 @@
 export async function getWords() {
   const response = await fetch('../assets/data/words.json');
   const data = await response.json();
-  const words = data.list;
+  return data.list;
+}
 
-  // Randomize the order of the words
+/**
+ * Randomizes the order of words in the array.
+ * @param {Array} words
+ * @returns {Array}
+ */
+export function randomizeWords(words) {
   for (let i = 0; i < words.length; i++) {
     const j = Math.floor(Math.random() * (i + 1));
     [words[i], words[j]] = [words[j], words[i]];
   }
-
   return words;
 }
