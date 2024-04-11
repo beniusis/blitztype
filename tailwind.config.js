@@ -19,10 +19,19 @@ tailwind.config = {
           to: {
             opacity: 1
           }
+        },
+        flash: {
+          '0%, 100%': {
+            opacity: 0
+          },
+          '50%': {
+            opacity: 1
+          }
         }
       },
       animation: {
-        fade: 'fade 1s ease-in'
+        fade: 'fade 1s ease-in',
+        flash: 'flash 1s linear infinite'
       }
     }
   }
