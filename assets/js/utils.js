@@ -2,7 +2,7 @@
  * Retrieves a custom collection of various English words.
  * @async
  * @function getWords
- * @returns {Promise<Array>}
+ * @returns Promise<Array>
  */
 export async function getWords() {
   const response = await fetch('../assets/data/words.json');
@@ -12,8 +12,9 @@ export async function getWords() {
 
 /**
  * Randomizes the order of words in the array.
- * @param {Array} words
- * @returns {Array}
+ * @function randomizeWords
+ * @param words Array
+ * @returns Array
  */
 export function randomizeWords(words) {
   for (let i = 0; i < words.length; i++) {
