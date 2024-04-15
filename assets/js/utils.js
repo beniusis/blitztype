@@ -1,3 +1,5 @@
+import { caretDiv, loader } from './elements.js';
+
 /**
  * Retrieves a custom collection of various English words in a random order.
  * @async
@@ -31,6 +33,9 @@ const randomizeWords = (words) => {
  * @param {HTMLElement} field
  */
 export const populate = async (field) => {
+  loader.classList.remove('hidden');
+  caretDiv.classList.add('hidden');
+
   const words = await getWords();
 
   words.forEach((word) => {
@@ -41,4 +46,7 @@ export const populate = async (field) => {
     letters += `<span class='letter'>&nbsp;</span>`;
     field.innerHTML += `<span class='word'>${letters}</span>`;
   });
+
+  loader.classList.add('hidden');
+  caretDiv.classList.remove('hidden');
 };

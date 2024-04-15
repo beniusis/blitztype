@@ -4,3 +4,4 @@ export const restartBtn = document.querySelector('#restart');
 export const timerDiv = document.querySelector('#timer');
 export const caretDiv = document.querySelector('#caret');
 export const textDiv = document.querySelector('#textfield');
+export const loader = document.querySelector('#loader');
