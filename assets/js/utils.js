@@ -18,7 +18,7 @@ import {
  * @returns {Promise<Array>} A promise that contains words in a random order in an array when fulfilled.
  */
 const getWords = async () => {
-  const response = await fetch('../assets/data/words.json');
+  const response = await fetch('./assets/data/words.json');
   const data = await response.json();
   return randomizeWords(data.list);
 };
