@@ -14,6 +14,11 @@
     <meta name="author" content="Rokas Beniušis" />
     <title>blitztype | a minimalistic typing speed test application</title>
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind.config.js"></script>
     <script src="assets/js/main.js" type="module"></script>
@@ -26,7 +31,6 @@
       <a
         class="text-4xl transition-all duration-300 ease-in cursor-pointer text-primary hover:text-bright-gray animate-fade"
         href="/"
-        aria-label="go to home page"
         >blitztype
       </a>
       <menu
@@ -142,6 +146,7 @@
             />
           </svg>
         </div>
+        <h2 class="text-3xl font-bold">All results</h2>
         <div id="stats-table"></div>
       </div>
     </div>
@@ -170,7 +175,6 @@
           class="transition-all duration-300 ease-in hover:text-bright-gray"
           href="https://github.com/beniusis"
           target="_blank"
-          aria-label="open a github profile of beniusis in the new tab"
           >Rokas Beniušis</a
         ></small
       >
