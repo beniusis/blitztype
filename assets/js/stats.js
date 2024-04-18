@@ -1,5 +1,3 @@
-import Result from './result.js';
-
 /**
  * Class to read and save the user's statistics.
  */
@@ -17,7 +15,7 @@ export default class Stats {
 
   /**
    * Save the previous result.
-   * @param {Result} result Result object.
+   * @param {object} result Result object.
    */
   save(result) {
     this.data.push(result);
@@ -30,5 +28,13 @@ export default class Stats {
    */
   getNextId() {
     return this.data.length + 1;
+  }
+
+  /**
+   * Get the last result object.
+   * @returns {object} The last result object.
+   */
+  getLastResult() {
+    return this.data[this.data.length - 1];
   }
 }
