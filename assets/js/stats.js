@@ -1,3 +1,8 @@
+import Result from './result.js';
+
+/**
+ * Class to read and save the user's statistics.
+ */
 export default class Stats {
   data;
 
@@ -12,7 +17,7 @@ export default class Stats {
 
   /**
    * Save the previous result.
-   * @param {object} result
+   * @param {Result} result Result object.
    */
   save(result) {
     this.data.push(result);
