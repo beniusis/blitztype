@@ -21,6 +21,7 @@
   <body
     class="flex flex-col items-center min-h-screen font-mono bg-dark-blue selection:bg-selection"
   >
+    <!-- Header -->
     <header class="mt-8 space-y-8 text-center">
       <a
         class="text-4xl transition-all duration-300 ease-in cursor-pointer text-primary hover:text-bright-gray animate-fade"
@@ -33,7 +34,7 @@
       >
         <button
           class="flex items-center justify-center gap-1 transition-all ease-in hover:text-accent active:scale-95"
-          id="stats"
+          id="view-statistics"
         >
           <svg width="24" height="24" class="fill-current">
             <path d="M9 6h2v14H9zm4 2h2v12h-2zm4-4h2v16h-2zM5 12h2v8H5z" /></svg
@@ -65,15 +66,18 @@
         </button>
       </menu>
     </header>
+
+    <!-- Loader -->
     <div
       class="absolute hidden -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
       id="loader"
-      aria-hidden="true"
     >
       <div
         class="w-[50px] h-[50px] rounded-full border-[4px] border-accent border-t-transparent animate-spin"
       ></div>
     </div>
+
+    <!-- Timer and Text Promp -->
     <main class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
       <div class="invisible text-3xl font-bold text-accent" id="timer"></div>
       <div class="relative">
@@ -83,10 +87,66 @@
         ></div>
         <div
           class="flex flex-wrap overflow-hidden text-2xl leading-10 select-none max-w-7xl text-primary max-h-28 animate-fade"
-          id="textfield"
+          id="text-prompt"
         ></div>
       </div>
     </main>
+
+    <!-- Result Modal -->
+    <div
+      class="fixed z-10 items-center justify-center hidden w-screen h-screen bg-dark-blue bg-opacity-80"
+      id="result-modal"
+    >
+      <div
+        class="relative flex flex-col items-center justify-center gap-6 p-10 w-[400px] bg-secondary h-[250px] rounded-xl text-bright-gray"
+      >
+        <div
+          class="absolute cursor-pointer max-w-fit max-h-fit top-2 right-2"
+          id="close-result-modal"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" class="fill-current">
+            <path
+              d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"
+            />
+          </svg>
+        </div>
+        <h2 class="text-3xl font-bold">Your Result</h2>
+        <div class="text-xl" id="comparison"></div>
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-xl font-normal">
+            WPM: <span class="font-bold" id="wpm-result"></span>
+          </div>
+          <div class="text-xl font-normal">
+            Accuracy:
+            <span class="font-bold" id="accuracy-result"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Modal -->
+    <div
+      class="fixed z-10 items-center justify-center hidden w-screen h-screen bg-dark-blue bg-opacity-80"
+      id="stats-modal"
+    >
+      <div
+        class="relative flex flex-col items-center justify-center gap-6 p-10 max-w-[900px] bg-secondary max-h-[750px] rounded-xl text-bright-gray"
+      >
+        <div
+          class="absolute cursor-pointer max-w-fit max-h-fit top-2 right-2"
+          id="close-stats-modal"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" class="fill-current">
+            <path
+              d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"
+            />
+          </svg>
+        </div>
+        <div id="stats-table"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
     <footer
       class="absolute flex flex-col items-center justify-center space-y-8 text-primary bottom-2 animate-fade"
     >
@@ -101,7 +161,7 @@
           <div class="px-1 leading-none bg-secondary text-bright-gray w-fit">
             enter
           </div>
-          - restart test
+          - restart test (current prompt)
         </div>
       </div>
       <small
