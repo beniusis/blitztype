@@ -11,11 +11,19 @@ export default class Stats {
   }
 
   /**
-   * Update the user's statistics with the previous result.
+   * Save the previous result.
    * @param {object} result
    */
-  update(result) {
+  save(result) {
     this.data.push(result);
     localStorage.setItem('stats', JSON.stringify(this.data));
+  }
+
+  /**
+   * Get the next ID to assign to a new result.
+   * @returns {number} The next ID to assign to a new result.
+   */
+  getNextId() {
+    return this.data.length + 1;
   }
 }
