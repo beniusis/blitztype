@@ -153,3 +153,11 @@ export const closeStatsModal = () => {
   statsModal.classList.add('hidden');
   statsTable.innerHTML = '';
 };
+
+/**
+ *
+ * @param {number} ms Time to wait for in milliseconds.
+ * @returns {Promise} A promise that is resolved after the specified time.
+ */
+export const waitFor = (ms) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
