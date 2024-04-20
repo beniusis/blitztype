@@ -19,7 +19,6 @@ A web-based typing speed test application built with vanilla JavaScript, HTML & 
     |       ├── constants.js    # Constant values
     |       ├── elements.js     # HTML elements
     |       ├── main.js         # Main application logic
-    |       ├── result.js       # Class for storing result's data
     |       ├── stats.js        # Class for storing stats data
     |       └── utils.js        # Utility (helper) functions
     ├── .gitignore
