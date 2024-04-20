@@ -9,7 +9,6 @@ import {
   viewStatisticsBtn
 } from './elements.js';
 import Stats from './stats.js';
-import Result from './result.js';
 import {
   calcAccuracy,
   closeStatsModal,
@@ -17,69 +16,67 @@ import {
   countWordsPerMinute,
   hasImproved,
   populate,
+  setTimerValue,
   showResultModal,
-  showStatsModal,
-  waitFor
+  showStatsModal
 } from './utils.js';
+import { TEST_TIME } from './constants.js';
 
 const stats = new Stats();
 
-let timeLeft = 60;
+let timeLeft = TEST_TIME;
 let charCount = 0;
-let previousResult = stats.getLastResult();
-let newResult;
-let stopTimerInterval = false;
+let interval;
 
 const startTimer = () => {
   document.removeEventListener('keydown', startTimer);
-  timer.classList.remove('invisible');
+  setTimerValue(timeLeft);
 
-  const interval = setInterval(() => {
-    if (stopTimerInterval) {
-      stopTimerInterval = false;
-      clearInterval(interval);
-    }
-
-    timer.innerText = timeLeft;
-
-    // Check if there is no time left. If so, then the typing speed test is finished - calculate the results and show them.
+  interval = setInterval(() => {
     if (timeLeft === 0) {
       document.removeEventListener('keydown', handleTyping);
+
       const id = stats.getNextId();
       const mistakes = countMistakes();
       const wpm = countWordsPerMinute(charCount, mistakes);
       const accuracy = calcAccuracy(charCount, mistakes);
-      newResult = new Result(id, wpm, accuracy);
-      const improved = hasImproved(previousResult, newResult);
-      stats.save(newResult);
-      showResultModal(newResult, improved);
+      const result = { id: id, wpm: wpm, accuracy: accuracy };
+      const improved = hasImproved(stats.getLastResult(), result);
+
+      stats.save(result);
+      showResultModal(result, improved);
       clearInterval(interval);
     }
 
     timeLeft--;
+    setTimerValue(timeLeft);
   }, 1000);
+
+  timer.classList.remove('invisible');
 };
 
-const handleTyping = (e) => {
-  if (e.key === 'Escape') return resetTest();
-  else if (e.key === 'Enter') return restartTest();
+const handleTyping = (event) => {
+  if (event.key === 'Escape') {
+    return resetTest();
+  }
+
+  if (event.key === 'Enter') {
+    return restartTest();
+  }
 
   const letters = textPrompt.querySelectorAll('.letter');
 
-  letters[charCount].scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-  if (letters[charCount].offsetTop !== 6) caret.style.top = `42px`;
-
   if (
-    letters[charCount].innerText === e.key ||
-    (letters[charCount].innerHTML === '&nbsp;' && e.key === ' ')
+    letters[charCount].innerText === event.key ||
+    (letters[charCount].innerHTML === '&nbsp;' && event.key === ' ')
   ) {
-    caret.style.left = `${letters[charCount].offsetLeft + 13}px`;
     letters[charCount].classList.add('text-light-green', 'correct');
     charCount++;
-  } else if (e.key === 'Backspace') {
-    if (charCount === 0) return;
-    caret.style.left = `${letters[charCount].offsetLeft - 13}px`;
+  } else if (event.key === 'Backspace') {
+    if (charCount === 0) {
+      return;
+    }
+
     charCount--;
     letters[charCount].classList.remove(
       'text-light-green',
@@ -89,7 +86,6 @@ const handleTyping = (e) => {
       'correct'
     );
   } else {
-    caret.style.left = `${letters[charCount].offsetLeft + 13}px`;
     if (letters[charCount].innerHTML === '&nbsp;') {
       letters[charCount].classList.add('bg-light-red', 'incorrect');
     } else {
@@ -97,12 +93,24 @@ const handleTyping = (e) => {
     }
     charCount++;
   }
+
+  caret.style.left = `${letters[charCount].offsetLeft}px`;
+
+  if (letters[charCount].offsetTop !== 6) {
+    caret.style.top = `42px`;
+  } else {
+    caret.style.top = `${letters[charCount].offsetTop}px`;
+  }
+
+  letters[charCount].scrollIntoView({ block: 'center' });
 };
 
 const restartTest = async () => {
-  timeLeft = 60;
+  clearInterval(interval);
+
+  timeLeft = TEST_TIME;
   charCount = 0;
-  stopTimerInterval = true;
+
   timer.classList.add('invisible');
   caret.style.left = '0px';
   caret.style.top = '6px';
@@ -115,27 +123,21 @@ const restartTest = async () => {
       'bg-light-red'
     );
   });
-
-  // wait for 1s, so the timer interval is cleared
-  await waitFor(1000);
-  stopTimerInterval = false;
   document.addEventListener('keydown', startTimer);
   document.addEventListener('keydown', handleTyping);
 };
 
 const resetTest = async () => {
-  timeLeft = 60;
+  clearInterval(interval);
+
+  timeLeft = TEST_TIME;
   charCount = 0;
-  stopTimerInterval = true;
+
+  populate();
+
   timer.classList.add('invisible');
   caret.style.left = '0px';
   caret.style.top = '6px';
-  textPrompt.innerHTML = '';
-  populate();
-
-  // wait for 1s, so the timer interval is cleared
-  await waitFor(1000);
-  stopTimerInterval = false;
   document.addEventListener('keydown', startTimer);
   document.addEventListener('keydown', handleTyping);
 };
@@ -148,6 +150,7 @@ document.addEventListener('keydown', handleTyping);
 resultModalCloseBtn.addEventListener('click', () => {
   resultModal.classList.remove('flex');
   resultModal.classList.add('hidden');
+
   resetTest();
 });
 
