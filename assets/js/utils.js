@@ -8,6 +8,7 @@ import {
   statsModal,
   statsTable,
   textPrompt,
+  timer,
   wpmResult
 } from './elements.js';
 
@@ -45,6 +46,7 @@ const randomizeWords = (words) => {
 export const populate = async () => {
   loader.classList.remove('hidden');
   caret.classList.add('hidden');
+  textPrompt.innerHTML = '';
 
   const words = await getWords();
 
@@ -161,3 +163,11 @@ export const closeStatsModal = () => {
  */
 export const waitFor = (ms) =>
   new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Set the timer element value.
+ * @param {number} value Time in seconds.
+ */
+export const setTimerValue = (value) => {
+  timer.innerText = value;
+};
